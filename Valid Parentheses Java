@@ -1,0 +1,48 @@
+/*
+Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Note that an empty string is also considered valid.
+
+Example 1:
+
+Input: "()"
+Output: true
+Example 2:
+
+Input: "()[]{}"
+Output: true
+Example 3:
+
+Input: "(]"
+Output: false
+Example 4:
+
+Input: "([)]"
+Output: false
+Example 5:
+
+Input: "{[]}"
+Output: true
+*/
+
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<Character>();
+        char[] d = s.toCharArray();
+        int i=0;
+        for(i=0;i<d.length;i++){
+            if(d[i]=='('||d[i]=='{'||d[i]=='[') stack.push(d[i]);
+            else if(d[i]==')'||d[i]=='}'||d[i]==']'){
+                if(stack.size()==0) return false;
+                char temp = stack.pop();
+                if(temp!=d[i]-1&&temp!=d[i]-2) return false;
+            }
+        }
+        if(stack.size()==0) return true;
+        return false;
+    }
+}
